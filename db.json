@@ -1,25 +1,19 @@
 {
-    "users":[
-        {
-        "id": 1,
-        "name": "Bonnie Green",
-        "email": "bonnie@flowbite.com",
-        "position": "Designer",
-        "completed": false,
-        "image": "/images/profile-2.jpg"
-        },
-        {
-        "id": 2,
-        "name": "Neil Sims",
-        "email": "neil.sims@flowbite.com",
-        "position": "React Developer",
-        "completed": true,
-        "image": "/images/profile-1.jpg" 
-        }        
-    ]
+  "Todos": [
+    {
+      "id": "1",
+      "title": "Todo 1",
+      "completed": true
+    },
+    {
+      "id": "2",
+      "title": "Todo 2",
+      "completed": true
+    },
+    {
+      "id": "3",
+      "title": "Todo 3",
+      "completed": true
+    }
+  ]
 }
-
-
-
-    
-
