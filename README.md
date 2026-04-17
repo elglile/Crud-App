@@ -1,7 +1,12 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Project CRUD NextJs
-
+https://www.youtube.com/watch?v=7WQqhW_Wt1o
+00:00 Introduction & json server install & ui design
+04:23 Getting and displaying todos
+06:18 Delete todo
+11:00 Create todo
+23:12 Add Dialog to confirm todo delete
 ## Getting Started
 
 First, run the development server:
@@ -37,6 +42,8 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
+## to run the server 
+npx json-server --watch db.json --port 3001
 
 ## DELETE FCT
     bach kn 9ad delete kndir folder ta3 delete fih folder ta3 sug [] li 4adi ib9a iji l id mn loraha page.tsx li 4tkon fih fct ta3 delet 
@@ -142,4 +149,80 @@ async function deleteTodo(formData: FormData) {
   redirect("/todos");
 }
 ```
+## ✅ CREATE Function – Résumé واضح ومرتب
+
+```ts
+"use client"
+import { Input } from "@/components/ui/input";
+import { Switch } from "@/components/ui/switch";
+import { useRouter } from "next/navigation";
+import { useRef } from "react";
+
+
+export default  function TodoCreate() {
+    // declaration ta3 les variable par default
+    const title = useRef("")
+    const isCompleted = useRef(false)
+    const Router = useRouter()
+    // fct li 4t 5dm b data
+    const callback = async (e) =>{
+        e.preventDefault()
+        // recupe data 
+        const titleValue = title.current.value
+        const isCompletedValue = isCompleted.current.value === 'on'
+        const res = await fetch(`http://localhost:3001/todos/`, {
+        cache: "no-store",
+        method: "POST",
+        body: JSON.stringify({title : titleValue, completed : isCompletedValue})
+        
+    })
+      if (res.ok) {
+        Router.push('/todos')
+    }
+
+    }
+    return (
+        <>
+            <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 dark:bg-black p-6 font-sans">
+            <form  onSubmit={callback} className="w-full max-w-md bg-white dark:bg-zinc-900 p-6 rounded-xl shadow space-y-6">
+                
+                {/* Email */}
+                <div className="flex flex-col gap-2">
+                <label htmlFor="title" className="text-sm font-medium">
+                    title
+                </label>
+                <Input
+                    ref={title}
+                    id={"title"}
+                    type="text"
+                    name={"title"}
+                    placeholder="Enter your title"
+                    className="w-full"
+                    autoFocus
+                />
+                </div>
+
+                {/* Switch */}
+                <div className="flex items-center justify-between">
+                <label htmlFor="completed" className="text-sm font-medium">
+                    Completed
+                </label>
+                <Switch ref={isCompleted} id="completed" />
+                </div>
+
+                {/* Button */}
+                <button
+                type="submit"
+                // call ta3 l fcy f la button
+                // onClick={callback}
+                className="w-full bg-black text-white dark:bg-white dark:text-black py-2 rounded-md hover:opacity-90 transition"
+                >
+                Create
+                </button>
+
+            </form>
+            </div>
+        </>
+    );
+}
 

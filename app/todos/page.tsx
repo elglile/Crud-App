@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button"
 import Link from "next/link";
+import { DeleteConfermation } from "@/components/DeleteConfermation";
 
 const users = [
     {
@@ -70,6 +71,11 @@ export default async function Todos() {
 
             <div className="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border-2 border-gray-300 rounded-lg border-default w-full max-w-6xl">
 
+            <div className="px-8 py-4 flex justify-end items-center ">
+                <Button className="bg-blue-400 text-white px-8 ">
+                    <Link href={`/todos/create/`}>create</Link>
+                </Button>
+            </div>
 
 
                 <table className="w-full text-sm text-left rtl:text-right text-body">
@@ -119,7 +125,10 @@ export default async function Todos() {
                                 <td className="px-6 py-4">
                                     <Button className="bg-green-400 text-white"><Link href={`/todos/update/${todo.id}`}>Update</Link></Button>
                                     
-                                    <Button variant="destructive" className="bg-red-400 text-white"><Link href={`/todos/delete/${todo.id}`}>Delete</Link></Button>
+                                    <Button variant="destructive" className="bg-red-400 text-white">
+                                        <Link href={`/todos/delete/${todo.id}`}>Delete</Link>
+                                    </Button>
+                                    <DeleteConfermation todo={todo}/>
                                     {/* <Button asChild variant="destructive"><Link href={`/todos/delete/${todo.id}`}>Delete</Link></Button> */}
                                 </td>
                             </tr>
